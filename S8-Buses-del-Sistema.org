@@ -56,11 +56,64 @@
 * Buses del Sistema
 ** Estructuras de Interconexión (7, 97)
 * Interconexión con Buses
-** Interconexión con Buses (7, 99)
-** Estructura del Bus  (7, 99)
-** Jerarquía de Buses Múltiples (7, 102)
-** Elementos de Diseño de un Bus (7, 104)
+** Interconexión con Buses (7, 99) j
+- Un computador consta de tres componentes fundamentales: *CPU*,
+  *Memoria* y *Módulos de E/S*.
+- Estos componentes deben comunicarse entre sí para ejecutar
+  programas.
+- La estructura de interconexión es el conjunto de caminos que
+  conectan estos módulos.
+- El diseño depende de los intercambios que deban realizarse:
+  - *Memoria a CPU*: La CPU lee una instrucción o dato desde la
+    memoria.
+  - *CPU a Memoria*: La CPU escribe un dato en la memoria.
+  - *E/S a CPU*: La CPU lee datos de un dispositivo de E/S mediante el
+    módulo correspondiente.
+  - *CPU a E/S*: La CPU envía datos o comandos al dispositivo de E/S.
+  - *E/S a/desde Memoria*: Utilizado en transferencias directas sin
+    pasar constantemente por la CPU (e.g., DMA - Acceso Directo a
+    Memoria).
+** Conceptos y Estructura Física
+*** ¿Qué es un Bus?
+- Un *bus* es un camino de comunicación compartido que conecta dos o
+  más dispositivos.
+- *Medio de difusión (broadcast)*: Las señales transmitidas por un
+  dispositivo son recibidas por todos los demás.
+- Si dos dispositivos transmiten al mismo tiempo, sus señales
+  colisionarán y se corromperán.
+- Por ende, solo *un dispositivo* puede transmitir datos con éxito en
+  un instante dado.
+- Los buses del sistema modernos constan de decenas de líneas de
+  comunicación individuales.
+** Estructura del Bus  (7, 99) j
+Un bus de sistema se divide en tres grupos funcionales de líneas:
+
+- *Bus de Datos*: 
+  - Proporciona un camino para transmitir datos entre los módulos.
+  - El número de líneas determina el *ancho del bus de datos* (e.g.,
+    32, 64 o 128 bits).
+  - El ancho del bus influye directamente en el rendimiento del
+    sistema.
+
+- *Bus de Direcciones*:
+  - Determina el origen o el destino del dato en el bus de datos.
+  - Si la CPU desea leer una palabra de memoria, coloca la dirección
+    física de la palabra en estas líneas.
+  - El *ancho del bus de direcciones* determina la capacidad máxima de
+    memoria direccionable del sistema ($2^{n}$ ubicaciones).
+
+- *Bus de Control*:
+  - Controla el acceso y uso de las líneas de datos y direcciones.
+  - Transmite órdenes y señales de temporización entre los módulos.
+  - *Señales típicas*: Escritura/Lectura de Memoria, Escritura/Lectura
+    de E/S, Petición de Bus, Concesión de Bus, Reloj, Reinicio.
+** Jerarquía de Buses Múltiples (7, 102) A
+** Elementos de Diseño de un Bus (7, 104) 
 * Interconexión punto a punto
+<<<<<<< HEAD
+** Interconexión punto a punto (11, 118)
+** QPI (11, 120) 
+=======
 ** Problemas del bus compartido tradicional
 [[./images/BusCuelloDeBotella.jpeg]]
 -Restricciones eléctricas: Al subir la frecuencia del reloj para ganar velocidad, el bus tradicional falla\\
@@ -148,8 +201,9 @@
 - **Protocolo:** Maneja la coherencia de caché, asegurando que todos los núcleos vean el dato más actualizado de la memoria.
 - **Unidad de mensaje:** El "Paquete", que consiste en un número entero de Flits.
 
+>>>>>>> 245737d0f76ca86c113e209142e4669c4dfe4f74
 * PCI Express
-** PCI Express (11, 123)
+** PCI Express (11, 123) D
 * Referencias
 ** Bibliografía
 :PROPERTIES:
