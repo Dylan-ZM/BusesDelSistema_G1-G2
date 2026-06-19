@@ -117,8 +117,98 @@ Un bus de sistema se divide en tres grupos funcionales de líneas:
     de E/S, Petición de Bus, Concesión de Bus, Reloj, Reinicio.
     [[./images/TipoLineas.png]]
     
-** Jerarquía de Buses Múltiples (7, 102) A
-** Elementos de Diseño de un Bus (7, 104) 
+** Jerarquía de Buses Múltiples (7, 102) 
+** Elementos de Diseño de un Bus (7, 104)
+- El diseño de un bus de sistema no es arbitrario; representa un balance
+  crítico entre *costo físico*, *complejidad del hardware* y
+  *rendimiento esperado*.
+- Para evaluar o diseñar un bus, Stallings define los siguientes parámetros clave:
+  - *Físicos*: Tipo de líneas y ancho del bus.
+  - *Lógicos y de Control*: Método de arbitraje, tipo de transferencia y temporización.
+- A continuación, se analizará cómo cada uno de estos elementos impacta directamente en el ancho de banda del procesador y el direccionamiento del sistema.
+
+* Tipos de Líneas de Bus
+
+* Tipos de Líneas de Bus
+** Clasificación por Funcionalidad
+*** Líneas Dedicadas vs Multiplexadas
+   :PROPERTIES:
+   :BEAMER_opt: allowframebreaks
+   :END:
+- *Dedicadas*:
+  - Asignadas permanentemente a una función o subconjunto de
+    componentes.
+  - Ejemplo: Líneas de direcciones y de datos físicamente separadas.
+  - +Rendimiento alto, -Costo de espacio y pines.
+- *Multiplexación Temporal*:
+  - El mismo conjunto de líneas se usa para diferentes propósitos en
+    tiempos distintos.
+  - Ejemplo: Las mismas líneas envían la dirección al inicio y luego
+    el dato.
+  - +Ahorro de espacio y pines, -Lógica de control compleja y
+    velocidad.
+* Arbitraje del Bus
+** Métodos de Control
+*** Arbitraje Centralizado vs Distribuido
+    :PROPERTIES:
+    :BEAMER_opt: allowframebreaks
+    :END:
+**** Centralizado                                               :Texto:BMCOL:
+     :PROPERTIES:
+     :BEAMER_col: 0.5
+     :END:
+- Un solo hardware (*árbitro*) asigna el acceso.
+- Proceso: Petición $\rightarrow$ Concesión.
+- Punto único de fallo.
+**** Distribuido                                               :Imagen:BMCOL:
+     :PROPERTIES:
+     :BEAMER_col: 0.5
+     :END:
+- No hay nodo central.
+- Cada módulo tiene lógica propia.
+- Cooperación mediante protocolos compartidos.
+
+* Temporización
+** Coordinación de Eventos
+*** Temporización Síncrona
+- Determinada por una señal de *reloj del sistema*.
+- Todos los dispositivos ven el tren de pulsos (0 y 1).
+- Las acciones ocurren en ciclos de reloj fijos.
+- *Ventaja*: Simple y rápida de probar.
+- *Desventaja*: El dispositivo más lento limita al bus entero.
+
+*** Temporización Asíncrona
+- La ocurrencia de un evento depende del éxito del evento anterior.
+- Utiliza un protocolo de saludo (*handshaking*).
+- $[REQ] \rightarrow [ACK] \rightarrow [Data]$
+- *Ventaja*: Mezcla eficiente de dispositivos rápidos y lentos.
+- *Desventaja*: Implementación de hardware muy compleja.
+
+* Ancho de Bus y Transferencia
+** Parámetros de Rendimiento
+*** Ancho del Bus
+**** Datos                                                            :BMCOL:
+     :PROPERTIES:
+     :BEAMER_col: 0.5
+     :END:
+- Determina cuántos bits se transmiten en paralelo.
+- A mayor ancho, mayor rendimiento del sistema.
+**** Direcciones                                                      :BMCOL:
+     :PROPERTIES:
+     :BEAMER_col: 0.5
+     :END:
+- Determina el rango de memoria direccionable.
+- Capacidad máxima: $2^{n}$ bytes.
+
+*** Tipos de Transferencia de Datos
+- *Lectura/Escritura*: Operación básica de memoria.
+- *Lectura-Modificación-Escritura*: 
+  - Operación atómica indivisible.
+  - Clave para sincronización y semáforos.
+- *Transferencia por Bloques*:
+  - Envía 1 dirección y luego una ráfaga de datos.
+  - Optimiza el uso de la memoria Caché y DMA.
+
 * Interconexión punto a punto
 ** Problemas del bus compartido tradicional
 [[./images/BusCuelloDeBotella.jpeg]]
@@ -144,7 +234,6 @@ Un bus de sistema se divide en tres grupos funcionales de líneas:
   - Transferencia de datos mediante paquetes con control de errores.
 
 ** Configuración Multinúcleo y Red de Conmutación
-
 *** Imagen QPI                                               :Imagen:
 :PROPERTIES:
 :BEAMER_col: 0.5
@@ -208,7 +297,7 @@ Un bus de sistema se divide en tres grupos funcionales de líneas:
 - **Unidad de mensaje:** El "Paquete", que consiste en un número entero de Flits.
 
 * PCI Express
-** PCI Express (11, 123) D
+** PCI Express (11, 123) 
 * Referencias
 ** Bibliografía
 :PROPERTIES:
