@@ -26,6 +26,105 @@
 
 * Buses del Sistema
 ** Estructuras de Interconexión (7, 97)
+:PROPERTIES:
+:BEAMER_opt: allowframebreaks
+:END:
+
+¿Cómo se comunican los módulos?
+#+begin_center
+*CPU* $\leftrightarrow$ *Memoria* $\leftrightarrow$ *E/S*
+#+end_center
+
+- *Red de comunicación interna:* El conjunto de caminos que conectan los diversos módulos.
+- *Intercambio de datos:* Flujo de bits de información entre componentes.
+- *Intercambio de direcciones:* Especificación del origen o destino del flujo.
+- *Intercambio de señales de control:* Sincronización y órdenes del sistema.
+
+#+begin_note
+- El computador está formado por módulos independientes.
+- Necesitan un mecanismo para intercambiar información.
+- La estructura de interconexión conecta CPU, memoria y dispositivos de E/S.
+#+end_note
+
+** Módulos Principales
+*** Componentes del Sistema
+    :PROPERTIES:
+    :BEAMER_col: 0.6
+    :END:
+| Módulo    | Función                        |
+|-----------+--------------------------------|
+| *CPU*     | Ejecuta instrucciones          |
+| *Memoria* | Almacena datos e instrucciones |
+| *E/S*     | Comunicación con el exterior   |
+
+*** Relación de Dependencia
+    :PROPERTIES:
+    :BEAMER_col: 0.4
+    :END:
+#+begin_center
+Ningún módulo trabaja de forma aislada; el rendimiento depende críticamente de la infraestructura que los une.
+#+end_center
+
+#+begin_note
+- Cada módulo cumple una tarea específica.
+- Ninguno trabaja aislado.
+- Todos dependen de la interconexión.
+#+end_note
+
+** Tipos de Transferencias (1/2)
+:PROPERTIES:
+:BEAMER_opt: allowframebreaks
+:END:
+
+*** Memoria $\rightarrow$ Procesador
+#+begin_center
+*Memoria* $\longrightarrow$ *CPU*
+#+end_center
+- Lectura de instrucciones y datos desde la RAM.
+- _Ejemplo:_ La CPU lee la siguiente instrucción de código a ejecutar.
+
+*** Procesador $\rightarrow$ Memoria
+#+begin_center
+*CPU* $\longrightarrow$ *Memoria*
+ #+end_center
+- Escritura de resultados y actualización de datos.
+- _Ejemplo:_ Guardar en la RAM el resultado de una operación matemática.
+
+
+** Tipos de Transferencias (2/2)
+:PROPERTIES:
+:BEAMER_opt: allowframebreaks
+:END:
+
+*** E/S $\rightarrow$ Procesador
+#+begin_center
+*Teclado* $\longrightarrow$ *CPU*
+#+end_center
+- Entrada de información y recepción de eventos externos.
+- _Ejemplo:_ Capturar la pulsación de una tecla por el usuario.
+
+*** Procesador $\rightarrow$ E/S
+#+begin_center
+*CPU* $\longrightarrow$ *Monitor*
+#+end_center
+- Salida de información y envío de comandos a periféricos.
+- _Ejemplo:_ Enviar los datos de video para mostrar una imagen en pantalla.
+
+** Transferencia Directa: Memoria $\leftrightarrow$ E/S (DMA)
+*** Acceso Directo a Memoria
+#+begin_center
+*Disco (SSD/HDD)* $\longleftrightarrow$ *Memoria*
+#+end_center
+- *Transferencia directa:* Intercambio de datos sin intervención constante de la CPU.
+- *Ventajas:* - Libera de carga de procesamiento al procesador.
+  - Incrementa sustancialmente el rendimiento global del sistema.
+- _Ejemplo:_ Copiar un archivo de gran tamaño desde el almacenamiento secundario hacia la memoria principal (RAM).
+
+** Resumen de Interconexiones
+- **Módulos clave:** CPU, Memoria y E/S constituyen el núcleo del hardware.
+- **Cinco transferencias fundamentales:** Definen todos los flujos lógicos posibles dentro de la arquitectura.
+- **Objetivo final:** La estructura de interconexión permite el funcionamiento dinámico, armonioso y coordinado del computador.
+  
 * Interconexión con Buses
 ** Interconexión con Buses (7, 99)
 :PROPERTIES:
