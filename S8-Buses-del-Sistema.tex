@@ -1,4 +1,4 @@
-% Created 2026-06-19 Fri 07:17
+% Created 2026-06-19 Fri 08:51
 % Intended LaTeX compiler: pdflatex
 \documentclass[presentation]{beamer}
 \usepackage[utf8]{inputenc}
@@ -16,7 +16,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
 \usepackage[backend=biber, style=apa]{biblatex}
-\addbibresource{/home/josetm-epn/PRESENTACION/BusesDelSistema_G1-G2/bibliography/bibliography.bib}
+\addbibresource{/home/emilioalbanfs/BusesDelSistema_G1-G2/bibliography/bibliography.bib}
 \usetheme{Madrid}
 \usecolortheme{}
 \usefonttheme{}
@@ -42,11 +42,124 @@
 
 
 \section{Buses del Sistema}
-\label{sec:org962fbc6}
-\begin{frame}[label={sec:org01a8829}]{Estructuras de Interconexión (7, 97)}
+\label{sec:org3ca6eba}
+\begin{frame}[allowframebreaks]{Estructuras de Interconexión (7, 97)}
+¿Cómo se comunican los módulos?
+\begin{center}
+\alert{CPU} \(\leftrightarrow\) \alert{Memoria} \(\leftrightarrow\) \alert{E/S}
+\end{center}
+
+\begin{itemize}
+\item \alert{Red de comunicación interna:} El conjunto de caminos que conectan los diversos módulos.
+\item \alert{Intercambio de datos:} Flujo de bits de información entre componentes.
+\item \alert{Intercambio de direcciones:} Especificación del origen o destino del flujo.
+\item \alert{Intercambio de señales de control:} Sincronización y órdenes del sistema.
+
+\item El computador está formado por módulos independientes.
+\item Necesitan un mecanismo para intercambiar información.
+\item La estructura de interconexión conecta CPU, memoria y dispositivos de E/S.
+\end{itemize}
 \end{frame}
+
+\begin{frame}[label={sec:org519cb12}]{Módulos Principales}
+\begin{columns}
+\begin{column}{0.6\columnwidth}
+\begin{center}
+\begin{tabular}{ll}
+Módulo & Función\\[0pt]
+\hline
+\alert{CPU} & Ejecuta instrucciones\\[0pt]
+\alert{Memoria} & Almacena datos e instrucciones\\[0pt]
+\alert{E/S} & Comunicación con el exterior\\[0pt]
+\end{tabular}
+\end{center}
+\end{column}
+
+\begin{column}{0.4\columnwidth}
+\begin{center}
+Ningún módulo trabaja de forma aislada; el rendimiento depende críticamente de la infraestructura que los une.
+\end{center}
+
+\begin{itemize}
+\item Cada módulo cumple una tarea específica.
+\item Ninguno trabaja aislado.
+\item Todos dependen de la interconexión.
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Tipos de Transferencias (1/2)}
+\begin{block}{Memoria \(\rightarrow\) Procesador}
+\begin{center}
+\alert{Memoria} \(\longrightarrow\) \alert{CPU}
+\end{center}
+\begin{itemize}
+\item Lectura de instrucciones y datos desde la RAM.
+\item \uline{Ejemplo:} La CPU lee la siguiente instrucción de código a ejecutar.
+\end{itemize}
+\end{block}
+
+\begin{block}{Procesador \(\rightarrow\) Memoria}
+\begin{center}
+\alert{CPU} \(\longrightarrow\) \alert{Memoria}
+\end{center}
+\begin{itemize}
+\item Escritura de resultados y actualización de datos.
+\item \uline{Ejemplo:} Guardar en la RAM el resultado de una operación matemática.
+\end{itemize}
+\end{block}
+\end{frame}
+
+
+\begin{frame}[allowframebreaks]{Tipos de Transferencias (2/2)}
+\begin{block}{E/S \(\rightarrow\) Procesador}
+\begin{center}
+\alert{Teclado} \(\longrightarrow\) \alert{CPU}
+\end{center}
+\begin{itemize}
+\item Entrada de información y recepción de eventos externos.
+\item \uline{Ejemplo:} Capturar la pulsación de una tecla por el usuario.
+\end{itemize}
+\end{block}
+
+\begin{block}{Procesador \(\rightarrow\) E/S}
+\begin{center}
+\alert{CPU} \(\longrightarrow\) \alert{Monitor}
+\end{center}
+\begin{itemize}
+\item Salida de información y envío de comandos a periféricos.
+\item \uline{Ejemplo:} Enviar los datos de video para mostrar una imagen en pantalla.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[label={sec:org43bfd63}]{Transferencia Directa: Memoria \(\leftrightarrow\) E/S (DMA)}
+\begin{block}{Acceso Directo a Memoria}
+\begin{center}
+\alert{Disco (SSD/HDD)} \(\longleftrightarrow\) \alert{Memoria}
+\end{center}
+\begin{itemize}
+\item \alert{Transferencia directa:} Intercambio de datos sin intervención constante de la CPU.
+\item \alert{Ventajas:} - Libera de carga de procesamiento al procesador.
+\begin{itemize}
+\item Incrementa sustancialmente el rendimiento global del sistema.
+\end{itemize}
+\item \uline{Ejemplo:} Copiar un archivo de gran tamaño desde el almacenamiento secundario hacia la memoria principal (RAM).
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[label={sec:org32281ba}]{Resumen de Interconexiones}
+\begin{itemize}
+\item \alert{\alert{Módulos clave:}} CPU, Memoria y E/S constituyen el núcleo del hardware.
+\item \alert{\alert{Cinco transferencias fundamentales:}} Definen todos los flujos lógicos posibles dentro de la arquitectura.
+\item \alert{\alert{Objetivo final:}} La estructura de interconexión permite el funcionamiento dinámico, armonioso y coordinado del computador.
+\end{itemize}
+\end{frame}
+
 \section{Interconexión con Buses}
-\label{sec:org1eca769}
+\label{sec:org9b27429}
 \begin{frame}[allowframebreaks]{Interconexión con Buses (7, 99)}
 \begin{itemize}
 \item Un computador consta de tres componentes fundamentales: \alert{CPU},
@@ -66,14 +179,15 @@ módulo correspondiente.
 \item \alert{E/S a/desde Memoria}: Utilizado en transferencias directas sin
 pasar constantemente por la CPU (e.g., DMA - Acceso Directo a
 Memoria).
+\end{itemize}
+\end{itemize}
+
 \begin{center}
-\includegraphics[width=.9\linewidth]{./images/ComponentesBus.png}
+\includegraphics[width=0.5\textwidth]{./images/ComponentesBus.png}
 \end{center}
-\end{itemize}
-\end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:orgc107316}]{Conceptos y Estructura Física}
+\begin{frame}[label={sec:org4a93e81}]{Conceptos y Estructura Física}
 \begin{block}{¿Qué es un Bus?}
 \begin{itemize}
 \item Un \alert{bus} es un camino de comunicación compartido que conecta dos o
@@ -117,11 +231,12 @@ memoria direccionable del sistema (\(2^{n}\) ubicaciones).
 \item Transmite órdenes y señales de temporización entre los módulos.
 \item \alert{Señales típicas}: Escritura/Lectura de Memoria, Escritura/Lectura
 de E/S, Petición de Bus, Concesión de Bus, Reloj, Reinicio.
+\end{itemize}
+\end{itemize}
+
 \begin{center}
-\includegraphics[width=.9\linewidth]{./images/TipoLineas.png}
+\includegraphics[width=0.45\textwidth]{./images/TipoLineas.png}
 \end{center}
-\end{itemize}
-\end{itemize}
 \end{frame}
 
 \begin{frame}[allowframebreaks]{¿Por qué surge la Jerarquía de Buses? (7, 102)}
@@ -137,11 +252,11 @@ de E/S, Petición de Bus, Concesión de Bus, Reloj, Reinicio.
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:org0c8a427}]{Jerarquía Tradicional de Buses (7, 102)}
+\begin{frame}[label={sec:org254e267}]{Jerarquía Tradicional de Buses (7, 102)}
 \begin{columns}
 \begin{column}{0.55\columnwidth}
 \begin{center}
-\includegraphics[width=\textwidth]{./images/JerarquiaTradicionalBus.png}
+\includegraphics[width=\textwidth]{./images/JerarquiaTradicionalBus.PNG}
 \end{center}
 \end{column}
 
@@ -156,11 +271,11 @@ de E/S, Petición de Bus, Concesión de Bus, Reloj, Reinicio.
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:org353a415}]{Jerarquía de Buses de Altas Prestaciones (7, 103)}
+\begin{frame}[label={sec:orgf9e778a}]{Jerarquía de Buses de Altas Prestaciones (7, 103)}
 \begin{columns}
 \begin{column}{0.55\columnwidth}
 \begin{center}
-\includegraphics[width=\textwidth]{./images/JerarquiaAltasPrestaciones.png}
+\includegraphics[width=\textwidth]{./images/JerarquiaAltasPrestaciones.PNG}
 \end{center}
 \end{column}
 
@@ -175,7 +290,7 @@ de E/S, Petición de Bus, Concesión de Bus, Reloj, Reinicio.
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orge96d997}]{Elementos de Diseño de un Bus (7, 104)}
+\begin{frame}[label={sec:org31fb2bd}]{Elementos de Diseño de un Bus (7, 104)}
 \begin{itemize}
 \item El diseño de un bus de sistema no es arbitrario; representa un balance
 crítico entre \alert{costo físico}, \alert{complejidad del hardware} y
@@ -190,8 +305,8 @@ crítico entre \alert{costo físico}, \alert{complejidad del hardware} y
 \end{frame}
 
 \section{Tipos de Líneas de Bus}
-\label{sec:orge5518ff}
-\begin{frame}[label={sec:orgdca400c}]{Clasificación por Funcionalidad}
+\label{sec:org3807706}
+\begin{frame}[label={sec:org897ba65}]{Clasificación por Funcionalidad}
 \begin{block}{Líneas Dedicadas vs Multiplexadas}
 \begin{itemize}
 \item \alert{Dedicadas}:
@@ -214,8 +329,8 @@ velocidad.
 \end{block}
 \end{frame}
 \section{Arbitraje del Bus}
-\label{sec:org6e0f206}
-\begin{frame}[label={sec:orged0c0a4}]{Métodos de Control}
+\label{sec:org95e0d56}
+\begin{frame}[label={sec:org6e52ce1}]{Métodos de Control}
 \begin{block}{Arbitraje Centralizado vs Distribuido}
 \begin{columns}
 \begin{column}{0.5\columnwidth}
@@ -237,8 +352,8 @@ velocidad.
 \end{frame}
 
 \section{Temporización}
-\label{sec:org840c5b7}
-\begin{frame}[label={sec:orgeed1d38}]{Coordinación de Eventos}
+\label{sec:orge3b3cd1}
+\begin{frame}[label={sec:org059932f}]{Coordinación de Eventos}
 \begin{block}{Temporización Síncrona}
 \begin{itemize}
 \item Determinada por una señal de \alert{reloj del sistema}.
@@ -261,8 +376,8 @@ velocidad.
 \end{frame}
 
 \section{Ancho de Bus y Transferencia}
-\label{sec:orgffb634d}
-\begin{frame}[label={sec:org7700ce1}]{Parámetros de Rendimiento}
+\label{sec:org2932d42}
+\begin{frame}[label={sec:orge58bb54}]{Parámetros de Rendimiento}
 \begin{block}{Ancho del Bus}
 \begin{columns}
 \begin{column}{0.5\columnwidth}
@@ -298,24 +413,28 @@ velocidad.
 \end{frame}
 
 \section{Interconexión punto a punto}
-\label{sec:org53dde13}
-\begin{frame}[label={sec:org033628e}]{Problemas del bus compartido tradicional}
+\label{sec:orgf9cab75}
+\begin{frame}[label={sec:orgb1ed6cb}]{Problemas del bus compartido tradicional}
 \begin{center}
-\includegraphics[width=.9\linewidth]{./images/BusCuelloDeBotella.jpeg}
+\includegraphics[width=0.5\textwidth]{./images/BusCuelloDeBotella.jpeg}
 \end{center}
--Restricciones eléctricas: Al subir la frecuencia del reloj para ganar velocidad, el bus tradicional falla\\[0pt]
--El problema: Con tasas de datos tan altas, es casi imposible realizar la sincronización y el arbitraje a tiempo y sin errores\\[0pt]
+\begin{itemize}
+\item Restricciones eléctricas: Al subir la frecuencia del reloj para ganar velocidad, el bus tradicional falla\\[0pt]
+\item El problema: Con tasas de datos tan altas, es casi imposible realizar la sincronización y el arbitraje a tiempo y sin errores\\[0pt]
+\end{itemize}
 \end{frame}
-\begin{frame}[label={sec:org24d7a08}]{El Reemplazo: Interconexión Punto a Punto}
+\begin{frame}[label={sec:orgc88e801}]{El Reemplazo: Interconexión Punto a Punto}
 \begin{center}
-\includegraphics[width=.9\linewidth]{./images/InterconexionPuntoaPunto.jpeg}
+\includegraphics[width=0.5\textwidth]{./images/InterconexionPuntoaPunto.jpeg}
 \end{center}
--El nuevo estándar: El bus compartido ha sido reemplazado casi por completo por interconexiones punto a punto\\[0pt]
--Ventajas: Menos latencia, una tasa de datos significativamente más alta y mejor escalabilidad\\[0pt]
+\begin{itemize}
+\item El nuevo estándar: El bus compartido ha sido reemplazado casi por completo por interconexiones punto a punto\\[0pt]
+\item Ventajas: Menos latencia, una tasa de datos significativamente más alta y mejor escalabilidad\\[0pt]
+\end{itemize}
 \end{frame}
-\begin{frame}[label={sec:org75b739c}]{El Reemplazo: Las 3 características modernas}
+\begin{frame}[label={sec:orge8b4dd3}]{El Reemplazo: Las 3 características modernas}
 \begin{center}
-\includegraphics[width=.9\linewidth]{./images/CapasIPP.jpeg}
+\includegraphics[width=0.5\textwidth]{./images/CapasIPP.jpeg}
 \end{center}
 \begin{enumerate}
 \item Conexiones directas por parejas: Al enlazar directamente dos componentes, se elimina por completo la necesidad de arbitraje
@@ -323,11 +442,10 @@ velocidad.
 \item Transferencia por paquetes: Los datos se envían como secuencias de paquetes que incluyen cabeceras y detección de errores
 \end{enumerate}
 \end{frame}
-\begin{frame}[label={sec:orge659f30}]{QPI (11, 120): Ejemplo de Interconexión Punto a Punto: Intel QPI?}
+\begin{frame}[label={sec:org23b5955}]{QPI (11, 120): Ejemplo de Interconexión Punto a Punto: Intel QPI?}
 \begin{itemize}
 \item \alert{\alert{Interconexión punto a punto}} de alta velocidad introducida en 2008 \autocite[p.118]{stallings2022computer}.
-\item \alert{\alert{Motivación:}} Superar restricciones eléctricas y latencia de los
-buses compartidos en chips multinúcleo.
+\item \alert{\alert{Motivación:}} Superar restricciones eléctricas y latencia de los buses compartidos en chips multinúcleo.
 \item \alert{\alert{Pilares:}}
 \begin{itemize}
 \item Conexiones directas por pares (sin arbitraje).
@@ -337,7 +455,7 @@ buses compartidos en chips multinúcleo.
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:org88feaa6}]{Configuración Multinúcleo y Red de Conmutación}
+\begin{frame}[label={sec:orgfdfddae}]{Configuración Multinúcleo y Red de Conmutación}
 \begin{columns}
 \begin{column}{0.5\columnwidth}
 \begin{center}
@@ -349,13 +467,13 @@ buses compartidos en chips multinúcleo.
 \begin{itemize}
 \item Los enlaces QPI (flechas verdes) forman una \alert{malla de conmutación} (switching fabric).
 \item Permite que los datos "salten" entre núcleos para llegar a su destino.
-\item Conecta el procesador con el I/O Hub (IOH), que traduce señales hacia dispositivos PCIe.** Configuración Multinúcleo y Red de Conmutación
+\item Conecta el procesador con el I/O Hub (IOH), que traduce señales hacia dispositivos PCIe.
 \end{itemize}
 \end{column}
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orgb099135}]{Arquitectura de 4 Capas de QPI}
+\begin{frame}[label={sec:org9476530}]{Arquitectura de 4 Capas de QPI}
 \begin{center}
 \includegraphics[width=0.5\textwidth]{./images/QPILayers.png}
 \end{center}
@@ -368,7 +486,7 @@ buses compartidos en chips multinúcleo.
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:org726c06b}]{Capa Física: Phits y Señalización Diferencial}
+\begin{frame}[label={sec:org36fe0f3}]{Capa Física: Phits y Señalización Diferencial}
 \begin{center}
 \includegraphics[width=0.45\textwidth]{./images/PhysicalInterfaceQPIInterconnect.png}
 \end{center}
@@ -381,7 +499,7 @@ hasta 32 GB/s.
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:org3c317ce}]{Capa Física: Distribución Multicarril}
+\begin{frame}[label={sec:orge6992a1}]{Capa Física: Distribución Multicarril}
 \begin{columns}
 \begin{column}{0.5\columnwidth}
 \begin{center}
@@ -392,14 +510,14 @@ hasta 32 GB/s.
 \begin{column}{0.5\columnwidth}
 \begin{itemize}
 \item El puerto QPI usa 20 carriles (\alert{lanes}) de datos en cada dirección.
-\item Los bits de un Flit se reparten entre los carriles usando técnica \alert{round‑robin}.
+\item Los bits de un Flit se reparten entre los carriles usando técnica \alert{roundrobin}.
 \item Permite la transmisión de un Phit completo (20 bits) en paralelo por ciclo.
 \end{itemize}
 \end{column}
 \end{columns}
 \end{frame}
 
-\begin{frame}[label={sec:orgbc2744a}]{Capa de Enlace: Flits y Control de Flujo}
+\begin{frame}[label={sec:org9967e59}]{Capa de Enlace: Flits y Control de Flujo}
 \begin{itemize}
 \item \alert{\alert{Flit (Flow Control Unit):}} PDU de 80 bits (72 de mensaje + 8 de CRC).
 \item \alert{\alert{Control de errores:}} Si el CRC falla, el receptor solicita retransmisión inmediata.
@@ -407,7 +525,7 @@ hasta 32 GB/s.
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:org6137380}]{Capas de Encaminamiento y Protocolo}
+\begin{frame}[label={sec:org6987ae7}]{Capas de Encaminamiento y Protocolo}
 \begin{itemize}
 \item \alert{\alert{Encaminamiento:}} Decide el camino del paquete a través de los nodos del sistema usando tablas de rutas.
 \item \alert{\alert{Protocolo:}} Maneja la coherencia de caché, asegurando que todos los núcleos vean el dato más actualizado de la memoria.
@@ -416,11 +534,14 @@ hasta 32 GB/s.
 \end{frame}
 
 \section{PCI Express}
-\label{sec:orgd81979c}
-\begin{frame}[label={sec:org16da063}]{PCI Express (11, 123)}
+\label{sec:org40921d7}
+\begin{frame}[label={sec:orga47fca4}]{PCI Express (11, 123)}
+\begin{itemize}
+\item PCI ..
+\end{itemize}
 \end{frame}
 \section{Referencias}
-\label{sec:orge8ad869}
+\label{sec:org723c9e8}
 \begin{frame}[allowframebreaks]{Bibliografía}
 \printbibliography
 \end{frame}

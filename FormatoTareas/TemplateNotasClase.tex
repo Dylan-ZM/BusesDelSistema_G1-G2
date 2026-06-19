@@ -1,0 +1,223 @@
+% Created 2026-06-19 Fri 07:54
+% Intended LaTeX compiler: pdflatex
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+
+\usepackage{fancyhdr}
+\usepackage[top=25mm, left=25mm, right=25mm]{geometry}
+\usepackage{longtable}
+\fancyhead[R]{}
+\setlength\headheight{43.0pt}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish, ]{babel}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{/home/emilioalbanfs/BusesDelSistema_G1-G2/FormatoTareas/bibliography.bib}
+\author{G1 [Emilio Alban, Ariel Montufar, Karen Suarez, Samuel Churaco]}
+\date{2026-06-19}
+\title{Toma de Notas - S8 Buses del Sistema}
+\hypersetup{
+ pdfauthor={G1 [Emilio Alban, Ariel Montufar, Karen Suarez, Samuel Churaco]},
+ pdftitle={Toma de Notas - S8 Buses del Sistema},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 27.1 (Org mode 9.7.5)}, 
+ pdflang={Español}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\fancyhead[C]{\includegraphics[scale=0.05]{./logoEPN.jpg}\\
+ESCUELA POLITÉCNICA NACIONAL\\FACULTAD DE INGENIERÍA DE SISTEMAS\\
+ARQUITECTURA DE COMPUTADORES}
+\thispagestyle{fancy}
+
+
+\section{Estructuras de Interconexión}
+\label{sec:org3f28678}
+
+\subsection{Preguntas y Términos clave (Cue):}
+\label{sec:org68b66ec}
+\begin{description}
+\item[{¿Qué es una estructura de interconexión?}] Es el conjunto de líneas
+o caminos que conectan los módulos principales (CPU, Memoria, E/S)
+para permitir la comunicación entre ellos.
+\item[{¿Cuáles son los tres módulos elementales del sistema?}] El
+Procesador (CPU), la Memoria y el módulo de Entrada/Salida (E/S).
+\item[{¿Qué señales intercambia típicamente la CPU?}] Lee instrucciones y
+datos, escribe datos procesados, envía señales de control y recibe
+señales de interrupción.
+\item[{¿En qué consiste el Acceso Directo a Memoria (DMA)?}] Es un
+intercambio directo de datos entre el módulo de E/S y la memoria sin
+que la información pase por el procesador, lo que ahorra tiempo de
+ejecución.
+\end{description}
+
+\subsection{Notas (Notes):}
+\label{sec:org18d603c}
+
+\subsubsection{El computador como una red de módulos}
+\label{sec:orgaa6b981}
+\begin{itemize}
+\item Un computador no es una sola pieza, sino una red de módulos que se
+comunican constantemente.
+\item La estructura de interconexión define los caminos por donde viaja la
+información entre estos componentes.
+\end{itemize}
+
+\subsubsection{Los Módulos y sus Señales (Basado en Figura 3.15 de Stallings)}
+\label{sec:org928b7e6}
+\begin{itemize}
+\item CPU (El Cerebro): Actúa como el controlador principal.
+\begin{itemize}
+\item Salidas: Direcciones y señales de control.
+\item Entradas: Datos, instrucciones y señales de interrupción.
+\end{itemize}
+\item Memoria (El Almacén): Constituida por N palabras de igual longitud,
+cada una con una dirección única. 
+\begin{itemize}
+\item Operaciones principales: Lectura y Escritura.
+\end{itemize}
+\item Módulo de E/S (La Interfaz): Similar a la memoria pero maneja
+dispositivos externos y puertos. 
+\begin{itemize}
+\item Puede enviar señales de interrupción a la CPU para avisar que
+terminó una tarea.
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Tipos de Transferencias de Datos}
+\label{sec:orgce3a666}
+La estructura debe soportar 5 intercambios fundamentales:
+\begin{enumerate}
+\item Memoria al Procesador: La CPU lee una instrucción o dato desde la
+memoria.
+\item Procesador a Memoria: La CPU escribe una unidad de datos en una
+dirección específica.
+\item E/S al Procesador: La CPU capta datos de un dispositivo externo a
+través del módulo de E/S.
+\item Procesador a E/S: El procesador envía datos o comandos hacia un
+periférico.
+\item Memoria a E/S y viceversa (DMA): Transferencia directa de bloques
+de datos entre memoria y periféricos sin intervención de la CPU.
+\end{enumerate}
+
+\subsection{Resumen (Summary):}
+\label{sec:orgf6a8f91}
+El computador funciona como una red de tres módulos (CPU, Memoria y
+E/S) unidos por una estructura de interconexión. Esta estructura
+permite mover datos e instrucciones mediante cinco tipos de
+transferencias clave, destacando el DMA por su capacidad de realizar
+intercambios directos entre memoria y periféricos para mejorar la
+eficiencia del sistema. 
+
+
+\section{Interconexión punto a punto}
+\label{sec:org465b6e7}
+\subsection{Preguntas y Términos clave (Cue):}
+\label{sec:orgd5255ac}
+\begin{itemize}
+\item ¿Por qué los buses compartidos tradicionales están siendo
+reemplazados en los sistemas modernos? :: Debido a las restricciones
+eléctricas al aumentar la frecuencia y la dificultad de realizar
+funciones de sincronización y arbitraje en tiempos cada vez más
+cortos .
+\item[{QPI (QuickPath Interconnect)}] Es una tecnología de interconexión
+punto a punto de alto rendimiento introducida por Intel en 2008 para
+superar los cuellos de botella de los buses compartidos.
+\item ¿Cuáles son las características principales de las arquitecturas
+punto a punto? :: Conexiones directas por parejas, arquitectura de
+protocolos en capas y transferencia de datos mediante paquetes con
+cabeceras y control de errores.
+\item[{¿Para qué sirve el carril de reloj en QPI?}] Sirve para sincronizar
+el envío de señales, permitiendo que el receptor identifique
+exactamente cuándo se transmite cada bit en los 20 carriles de
+datos.
+\item[{¿Puede haber pérdida de bits? ¿En qué casos?}] Sí, el ruido
+eléctrico puede alterar bits. La capa de enlace detecta esto
+mediante el código CRC y solicita la retransmisión del paquete
+dañado.
+\end{itemize}
+
+\subsection{Notas (Notes):}
+\label{sec:org00d3ca1}
+\subsubsection{El fin del bus compartido}
+\label{sec:org8d22d38}
+\begin{itemize}
+\item El bus compartido fue el estándar durante décadas, pero está siendo
+abandonado debido a restricciones eléctricas en sistemas de alta
+velocidad.
+\item A medida que se incrementa la frecuencia de los buses síncronos
+anchos, resulta casi imposible sincronizar y arbitrar los datos a
+tiempo.
+\item La llegada de los chips multinúcleo multiplicó estas dificultades,
+requiriendo menor latencia y mayor tasa de datos para no frenar a
+los procesadores.
+\end{itemize}
+\subsubsection{Características de la Interconexión Punto a Punto}
+\label{sec:org4f61726}
+\begin{itemize}
+\item Este modelo ofrece menor latencia, mayor tasa de datos y mejor
+escalabilidad que los buses tradicionales.
+\item Presenta 3 características fundamentales:
+\begin{enumerate}
+\item \textbf{Múltiples conexiones directas:} Enlaces directos por parejas
+entre componentes, eliminando la necesidad de arbitraje por el
+uso del medio.
+\item \textbf{Arquitectura de protocolos en capas:} Estructura similar a redes
+(como TCP/IP), organizada en 4 niveles técnicos.
+\item \textbf{Transferencia por paquetes:} Los datos se encapsulan en paquetes
+con etiquetas de control y códigos de corrección de errores
+(CRC), en lugar de enviarse como un flujo de bits en bruto .
+\end{enumerate}
+\end{itemize}
+
+\subsubsection{El modelo QPI (QuickPath Interconnect)}
+\label{sec:org4cd4940}
+\begin{itemize}
+\item Arquitectura estructurada en 4 capas: Física (señales eléctricas), Enlace (fiabilidad), Encaminamiento (tablas de ruta) y Protocolo (coherencia de caché).
+\item \textbf{Unidades de transferencia:} 
+\begin{itemize}
+\item Capa Física: La unidad es el \textbf{Phit} (20 bits).
+\item Capa de Enlace: La unidad es el \textbf{Flit} (80 bits: 72 de mensaje y 8 de CRC).
+\end{itemize}
+\item \textbf{Transmisión y Hardware:} Utiliza 20 carriles de datos por dirección y señalización diferencial de bajo voltaje (LVDS) para mitigar el ruido.
+\item \textbf{Control de Flujo:} Usa un sistema de créditos; el receptor devuelve créditos al emisor cuando sus buffers tienen espacio libre, evitando la saturación del sistema.
+\item \textbf{Cálculos de capacidad de transferencia:} 
+A velocidades típicas de 6.4 GT/s (transferencias por segundo), enviando 20 bits por Phit en cada transferencia, la capacidad por dirección es:
+\(6.4 \text{ GT/s} \times 20 \text{ bits} = 16 \text{ GB/s}\).
+Como los enlaces QPI son pares bidireccionales dedicados, la capacidad total de un enlace es:
+\(16 \text{ GB/s} \times 2 = 32 \text{ GB/s}\).
+\end{itemize}
+\subsection{Resumen (Summary):}
+\label{sec:orga1c070b}
+La evolución tecnológica abandonó los buses compartidos porque las
+altas frecuencias eléctricas hacían casi imposible sincronizar y
+arbitrar los datos a tiempo. Al evolucionar a arquitecturas de
+interconexión punto a punto de alto rendimiento como QPI, se mejora
+drásticamente la escalabilidad y la latencia del sistema. Esto se
+logra empleando conexiones directas que eliminan el arbitraje, y
+gestionando la información estructurada en paquetes a través de
+protocolos de capas (Física, Enlace, Enrutamiento y Protocolo)
+
+
+\section{{\bfseries\sffamily TODO} Mis Tareas [100\%]}
+\label{sec:org24bd83b}
+\begin{itemize}
+\item[{$\boxtimes$}] Leer este documento
+\item[{$\boxtimes$}] Escribir el resumen  de la exposición 1 - G1
+\end{itemize}
+
+\printbibliography
+\end{document}

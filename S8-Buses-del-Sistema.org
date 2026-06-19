@@ -22,7 +22,7 @@
 #+LATEX_HEADER: \usepackage[T1]{fontenc}
 #+LATEX_HEADER: \usepackage[utf8]{inputenc}
 #+LATEX_HEADER: \usepackage[spanish]{babel}
-#+LATEX_HEADER: \usepackage[backend=biber,citestyle=apa, style=apa]{biblatex}
+#+LATEX_HEADER: \usepackage[backend=biber, style=apa]{biblatex}
 
 * Buses del Sistema
 ** Estructuras de Interconexión (7, 97)
@@ -40,11 +40,9 @@
 - *Intercambio de direcciones:* Especificación del origen o destino del flujo.
 - *Intercambio de señales de control:* Sincronización y órdenes del sistema.
 
-#+begin_note
 - El computador está formado por módulos independientes.
 - Necesitan un mecanismo para intercambiar información.
 - La estructura de interconexión conecta CPU, memoria y dispositivos de E/S.
-#+end_note
 
 ** Módulos Principales
 *** Componentes del Sistema
@@ -65,11 +63,9 @@
 Ningún módulo trabaja de forma aislada; el rendimiento depende críticamente de la infraestructura que los une.
 #+end_center
 
-#+begin_note
 - Cada módulo cumple una tarea específica.
 - Ninguno trabaja aislado.
 - Todos dependen de la interconexión.
-#+end_note
 
 ** Tipos de Transferencias (1/2)
 :PROPERTIES:
@@ -86,7 +82,7 @@ Ningún módulo trabaja de forma aislada; el rendimiento depende críticamente d
 *** Procesador $\rightarrow$ Memoria
 #+begin_center
 *CPU* $\longrightarrow$ *Memoria*
- #+end_center
+#+end_center
 - Escritura de resultados y actualización de datos.
 - _Ejemplo:_ Guardar en la RAM el resultado de una operación matemática.
 
@@ -146,7 +142,9 @@ Ningún módulo trabaja de forma aislada; el rendimiento depende críticamente d
   - *E/S a/desde Memoria*: Utilizado en transferencias directas sin
     pasar constantemente por la CPU (e.g., DMA - Acceso Directo a
     Memoria).
-    [[./images/ComponentesBus.png]]
+
+#+ATTR_LATEX: :width 0.5\textwidth
+[[./images/ComponentesBus.png]]
     
 ** Conceptos y Estructura Física
 *** ¿Qué es un Bus?
@@ -185,8 +183,10 @@ Un bus de sistema se divide en tres grupos funcionales de líneas:
   - Transmite órdenes y señales de temporización entre los módulos.
   - *Señales típicas*: Escritura/Lectura de Memoria, Escritura/Lectura
     de E/S, Petición de Bus, Concesión de Bus, Reloj, Reinicio.
-    [[./images/TipoLineas.png]]
-    
+
+#+ATTR_LATEX: :width 0.45\textwidth
+[[./images/TipoLineas.png]]
+
 ** ¿Por qué surge la Jerarquía de Buses? (7, 102)
 :PROPERTIES:
 :BEAMER_opt: allowframebreaks
@@ -204,7 +204,7 @@ Un bus de sistema se divide en tres grupos funcionales de líneas:
 :BEAMER_col: 0.55
 :END:
 #+ATTR_LATEX: :width \textwidth
-[[./images/JerarquiaTradicionalBus.png]]
+[[./images/JerarquiaTradicionalBus.PNG]]
 
 *** Características                                           
 :PROPERTIES:
@@ -222,7 +222,7 @@ Un bus de sistema se divide en tres grupos funcionales de líneas:
 :BEAMER_col: 0.55
 :END:
 #+ATTR_LATEX: :width \textwidth
-[[./images/JerarquiaAltasPrestaciones.png]]
+[[./images/JerarquiaAltasPrestaciones.PNG]]
 
 *** Características                                           
 :PROPERTIES:
@@ -266,14 +266,14 @@ Un bus de sistema se divide en tres grupos funcionales de líneas:
     :PROPERTIES:
     :BEAMER_opt: allowframebreaks
     :END:
-**** Centralizado                                               :Texto:BMCOL:
+**** Centralizado                                              :BMCOL:
      :PROPERTIES:
      :BEAMER_col: 0.5
      :END:
 - Un solo hardware (*árbitro*) asigna el acceso.
 - Proceso: Petición $\rightarrow$ Concesión.
 - Punto único de fallo.
-**** Distribuido                                               :Imagen:BMCOL:
+**** Distribuido                                              :BMCOL:
      :PROPERTIES:
      :BEAMER_col: 0.5
      :END:
@@ -324,24 +324,26 @@ Un bus de sistema se divide en tres grupos funcionales de líneas:
 
 * Interconexión punto a punto
 ** Problemas del bus compartido tradicional
+#+ATTR_LATEX: :width 0.5\textwidth
 [[./images/BusCuelloDeBotella.jpeg]]
--Restricciones eléctricas: Al subir la frecuencia del reloj para ganar velocidad, el bus tradicional falla\\
--El problema: Con tasas de datos tan altas, es casi imposible realizar la sincronización y el arbitraje a tiempo y sin errores\\
+ - Restricciones eléctricas: Al subir la frecuencia del reloj para ganar velocidad, el bus tradicional falla\\
+ - El problema: Con tasas de datos tan altas, es casi imposible realizar la sincronización y el arbitraje a tiempo y sin errores\\
 ** El Reemplazo: Interconexión Punto a Punto
+#+ATTR_LATEX: :width 0.5\textwidth
 [[./images/InterconexionPuntoaPunto.jpeg]]
--El nuevo estándar: El bus compartido ha sido reemplazado casi por completo por interconexiones punto a punto\\
--Ventajas: Menos latencia, una tasa de datos significativamente más alta y mejor escalabilidad\\
-** El Reemplazo: Las 3 características modernas 
+ - El nuevo estándar: El bus compartido ha sido reemplazado casi por completo por interconexiones punto a punto\\
+ - Ventajas: Menos latencia, una tasa de datos significativamente más alta y mejor escalabilidad\\
+** El Reemplazo: Las 3 características modernas
+#+ATTR_LATEX: :width 0.5\textwidth
 [[./images/CapasIPP.jpeg]]
-1. Conexiones directas por parejas: Al enlazar directamente dos componentes, se elimina por completo la necesidad de arbitraje
-2. Arquitectura de protocolos en capas: Se estructuran de forma similar a las redes de datos (como TCP/IP)
-3. Transferencia por paquetes: Los datos se envían como secuencias de paquetes que incluyen cabeceras y detección de errores   
+ 1. Conexiones directas por parejas: Al enlazar directamente dos componentes, se elimina por completo la necesidad de arbitraje
+ 2. Arquitectura de protocolos en capas: Se estructuran de forma similar a las redes de datos (como TCP/IP)
+ 3. Transferencia por paquetes: Los datos se envían como secuencias de paquetes que incluyen cabeceras y detección de errores   
 ** QPI (11, 120): Ejemplo de Interconexión Punto a Punto: Intel QPI?
 # INSTRUCCIÓN: Introducción y motivación del cambio de bus a punto a punto.
-- **Interconexión punto a punto** de alta velocidad introducida en 2008 [cite:@stallings2022computer p.118].
-- **Motivación:** Superar restricciones eléctricas y latencia de los
-  buses compartidos en chips multinúcleo.
-- **Pilares:**
+ - **Interconexión punto a punto** de alta velocidad introducida en 2008 [cite:@stallings2022computer p.118].
+ - **Motivación:** Superar restricciones eléctricas y latencia de los buses compartidos en chips multinúcleo.
+ - **Pilares:**
   - Conexiones directas por pares (sin arbitraje).
   - Arquitectura de protocolo en capas.
   - Transferencia de datos mediante paquetes con control de errores.
@@ -360,8 +362,7 @@ Un bus de sistema se divide en tres grupos funcionales de líneas:
 :END:
 - Los enlaces QPI (flechas verdes) forman una *malla de conmutación* (switching fabric).
 - Permite que los datos "salten" entre núcleos para llegar a su destino.
-- Conecta el procesador con el I/O Hub (IOH), que traduce señales hacia dispositivos PCIe.** Configuración Multinúcleo y Red de Conmutación
-#+ATTR_LATEX: :width 0.45\textwidth
+- Conecta el procesador con el I/O Hub (IOH), que traduce señales hacia dispositivos PCIe.
 
 ** Arquitectura de 4 Capas de QPI
 #+ATTR_LATEX: :width 0.5\textwidth
@@ -395,22 +396,23 @@ Un bus de sistema se divide en tres grupos funcionales de líneas:
 :PROPERTIES:
 :BEAMER_col: 0.5
 :END:
-- El puerto QPI usa 20 carriles (*lanes*) de datos en cada dirección.
-- Los bits de un Flit se reparten entre los carriles usando técnica *round‑robin*.
-- Permite la transmisión de un Phit completo (20 bits) en paralelo por ciclo.
+ - El puerto QPI usa 20 carriles (*lanes*) de datos en cada dirección.
+ - Los bits de un Flit se reparten entre los carriles usando técnica *roundrobin*.
+ - Permite la transmisión de un Phit completo (20 bits) en paralelo por ciclo.
   
 ** Capa de Enlace: Flits y Control de Flujo
-- **Flit (Flow Control Unit):** PDU de 80 bits (72 de mensaje + 8 de CRC).
-- **Control de errores:** Si el CRC falla, el receptor solicita retransmisión inmediata.
-- **Esquema de Créditos:** El receptor devuelve créditos al emisor cuando su buffer tiene espacio, evitando saturación.
+ - **Flit (Flow Control Unit):** PDU de 80 bits (72 de mensaje + 8 de CRC).
+ - **Control de errores:** Si el CRC falla, el receptor solicita retransmisión inmediata.
+ - **Esquema de Créditos:** El receptor devuelve créditos al emisor cuando su buffer tiene espacio, evitando saturación.
 
 ** Capas de Encaminamiento y Protocolo
-- **Encaminamiento:** Decide el camino del paquete a través de los nodos del sistema usando tablas de rutas.
-- **Protocolo:** Maneja la coherencia de caché, asegurando que todos los núcleos vean el dato más actualizado de la memoria.
-- **Unidad de mensaje:** El "Paquete", que consiste en un número entero de Flits.
+ - **Encaminamiento:** Decide el camino del paquete a través de los nodos del sistema usando tablas de rutas.
+ - **Protocolo:** Maneja la coherencia de caché, asegurando que todos los núcleos vean el dato más actualizado de la memoria.
+ - **Unidad de mensaje:** El "Paquete", que consiste en un número entero de Flits.
 
 * PCI Express
-** PCI Express (11, 123) 
+** PCI Express (11, 123)
+- PCI ..
 * Referencias
 ** Bibliografía
 :PROPERTIES:
