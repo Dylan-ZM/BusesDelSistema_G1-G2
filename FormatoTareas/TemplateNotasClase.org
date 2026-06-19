@@ -3,9 +3,9 @@
 #+options: d:(not "LOGBOOK") date:t e:t email:nil expand-links:t f:t
 #+options: inline:t num:t p:nil pri:nil prop:nil stat:t tags:t
 #+options: tasks:t tex:t timestamp:t title:t toc:t todo:t |:t
-#+title: Plantilla para Toma de Notas en Clase
-#+date: 2024-07-
-#+author: COLOQUE SU NOMBRE
+#+title: Toma de Notas - S8 Buses del Sistema
+#+date: 2026-06-19
+#+author: G1-G2
 #+email: coloque.su.nombre@epn.edu.ec
 #+language: Español
 #+select_tags: export
@@ -45,81 +45,132 @@ ARQUITECTURA DE COMPUTADORES}
 #+end_export
 
 
-#+begin_comment
-Este comentario contiene la estructura básica para toma de notas de
-acuerdo a la metodología explicada por la Universidad de Cornell.
-* 2024-xx-xx Interconexión punto a punto
+* Estructuras de Interconexión
+
 ** Preguntas y Términos clave (Cue):
-- ¿Por qué los buses compartidos tradicionales están siendo reemplazados en los sistemas modernos? ::
-- QPI ::
-- ¿Cuáles son las características principales de las arquitecturas punto a punto? :: 
+- ¿Qué es una estructura de interconexión? :: Es el conjunto de líneas
+  o caminos que conectan los módulos principales (CPU, Memoria, E/S)
+  para permitir la comunicación entre ellos. 
+- ¿Cuáles son los tres módulos elementales del sistema? :: El
+  Procesador (CPU), la Memoria y el módulo de Entrada/Salida (E/S). 
+- ¿Qué señales intercambia típicamente la CPU? :: Lee instrucciones y
+  datos, escribe datos procesados, envía señales de control y recibe
+  señales de interrupción. 
+- ¿En qué consiste el Acceso Directo a Memoria (DMA)? :: Es un
+  intercambio directo de datos entre el módulo de E/S y la memoria sin
+  que la información pase por el procesador, lo que ahorra tiempo de
+  ejecución. 
+
+** Notas (Notes):
+
+*** El computador como una red de módulos
+- Un computador no es una sola pieza, sino una red de módulos que se
+  comunican constantemente. 
+- La estructura de interconexión define los caminos por donde viaja la
+  información entre estos componentes. 
+
+*** Los Módulos y sus Señales (Basado en Figura 3.15 de Stallings)
+- CPU (El Cerebro): Actúa como el controlador principal.
+  - Salidas: Direcciones y señales de control.
+  - Entradas: Datos, instrucciones y señales de interrupción.
+- Memoria (El Almacén): Constituida por N palabras de igual longitud,
+  cada una con una dirección única. 
+  - Operaciones principales: Lectura y Escritura.
+- Módulo de E/S (La Interfaz): Similar a la memoria pero maneja
+  dispositivos externos y puertos. 
+  - Puede enviar señales de interrupción a la CPU para avisar que
+    terminó una tarea. 
+
+*** Tipos de Transferencias de Datos
+La estructura debe soportar 5 intercambios fundamentales:
+1. Memoria al Procesador: La CPU lee una instrucción o dato desde la
+   memoria. 
+2. Procesador a Memoria: La CPU escribe una unidad de datos en una
+   dirección específica. 
+3. E/S al Procesador: La CPU capta datos de un dispositivo externo a
+   través del módulo de E/S. 
+4. Procesador a E/S: El procesador envía datos o comandos hacia un
+   periférico. 
+5. Memoria a E/S y viceversa (DMA): Transferencia directa de bloques
+   de datos entre memoria y periféricos sin intervención de la CPU. 
+
+** Resumen (Summary):
+El computador funciona como una red de tres módulos (CPU, Memoria y
+E/S) unidos por una estructura de interconexión. Esta estructura
+permite mover datos e instrucciones mediante cinco tipos de
+transferencias clave, destacando el DMA por su capacidad de realizar
+intercambios directos entre memoria y periféricos para mejorar la
+eficiencia del sistema. 
+
+
+* Interconexión punto a punto
+** Preguntas y Términos clave (Cue):
+- ¿Por qué los buses compartidos tradicionales están siendo
+  reemplazados en los sistemas modernos? :: Debido a las restricciones
+  eléctricas al aumentar la frecuencia y la dificultad de realizar
+  funciones de sincronización y arbitraje en tiempos cada vez más
+  cortos .
+- QPI (QuickPath Interconnect) :: Es una tecnología de interconexión
+  punto a punto de alto rendimiento introducida por Intel en 2008 para
+  superar los cuellos de botella de los buses compartidos.
+- ¿Cuáles son las características principales de las arquitecturas
+  punto a punto? :: Conexiones directas por parejas, arquitectura de
+  protocolos en capas y transferencia de datos mediante paquetes con
+  cabeceras y control de errores. 
+- ¿Para qué sirve el carril de reloj en QPI? :: Sirve para sincronizar
+  el envío de señales, permitiendo que el receptor identifique
+  exactamente cuándo se transmite cada bit en los 20 carriles de
+  datos. 
+- ¿Puede haber pérdida de bits? ¿En qué casos? :: Sí, el ruido
+  eléctrico puede alterar bits. La capa de enlace detecta esto
+  mediante el código CRC y solicita la retransmisión del paquete
+  dañado.
+  
 ** Notas (Notes):
 *** El fin del bus compartido
-- El bus compartido fue el estándar durante décadas, pero está siendo abandonado debido a restricciones eléctricas.
-- A medida que se incrementa la frecuencia de los buses síncronos anchos para ganar velocidad, resulta cada vez más difícil realizar las funciones de sincronización y arbitraje a tiempo. 
-- La llegada de los chips multinúcleo magnificó las dificultades de los buses compartidos para reducir la latencia y aumentar la tasa de datos.
-
+- El bus compartido fue el estándar durante décadas, pero está siendo
+  abandonado debido a restricciones eléctricas en sistemas de alta
+  velocidad. 
+- A medida que se incrementa la frecuencia de los buses síncronos
+  anchos, resulta casi imposible sincronizar y arbitrar los datos a
+  tiempo.
+- La llegada de los chips multinúcleo multiplicó estas dificultades,
+  requiriendo menor latencia y mayor tasa de datos para no frenar a
+  los procesadores.
 *** Características de la Interconexión Punto a Punto
-- Este modelo tiene menor latencia, mayor tasa de datos y mejor escalabilidad que los buses compartidos.
+- Este modelo ofrece menor latencia, mayor tasa de datos y mejor
+  escalabilidad que los buses tradicionales.
 - Presenta 3 características fundamentales:
-  1. *Múltiples conexiones directas:* Existen conexiones directas por parejas entre componentes, lo que elimina por completo la necesidad de arbitraje.
-  2. *Arquitectura de protocolos en capas:* Se estructuran de forma similar a los entornos de redes (como TCP/IP), en lugar de utilizar simples señales de control.
-  3. *Transferencia por paquetes:* Los datos se envían como una secuencia de paquetes que incluyen cabeceras de control y códigos de corrección de errores, en lugar de un flujo de bits crudos.
+  1. *Múltiples conexiones directas:* Enlaces directos por parejas
+     entre componentes, eliminando la necesidad de arbitraje por el
+     uso del medio.
+  2. *Arquitectura de protocolos en capas:* Estructura similar a redes
+     (como TCP/IP), organizada en 4 niveles técnicos.
+  3. *Transferencia por paquetes:* Los datos se encapsulan en paquetes
+     con etiquetas de control y códigos de corrección de errores
+     (CRC), en lugar de enviarse como un flujo de bits en bruto .
+
 *** El modelo QPI (QuickPath Interconnect)
-- Es una arquitectura estructurada en 4 capas: Física, Enlace, Enrutamiento y Protocolo.
-- *Unidades de transferencia:* En la capa Física la unidad es el *Phit* (20 bits). En la capa de Enlace la unidad es el *Flit* (80 bits).
-- La transmisión en cada carril utiliza señalización diferencial de bajo voltaje (LVDS).
+- Arquitectura estructurada en 4 capas: Física (señales eléctricas), Enlace (fiabilidad), Encaminamiento (tablas de ruta) y Protocolo (coherencia de caché).
+- *Unidades de transferencia:* 
+  - Capa Física: La unidad es el *Phit* (20 bits).
+  - Capa de Enlace: La unidad es el *Flit* (80 bits: 72 de mensaje y 8 de CRC).
+- *Transmisión y Hardware:* Utiliza 20 carriles de datos por dirección y señalización diferencial de bajo voltaje (LVDS) para mitigar el ruido.
+- *Control de Flujo:* Usa un sistema de créditos; el receptor devuelve créditos al emisor cuando sus buffers tienen espacio libre, evitando la saturación del sistema.
 - *Cálculos de capacidad de transferencia:* 
-  A velocidades de señalización típicas de 6.4 GT/s (transferencias por segundo), enviando 20 bits por Phit en cada transferencia, la capacidad por dirección es:
-  $6.4 \text{ GT/s} \times 20 \text{ bits} = 16 \text{ GB/s}$ 
+  A velocidades típicas de 6.4 GT/s (transferencias por segundo), enviando 20 bits por Phit en cada transferencia, la capacidad por dirección es:
+  $6.4 \text{ GT/s} \times 20 \text{ bits} = 16 \text{ GB/s}$.
   Como los enlaces QPI son pares bidireccionales dedicados, la capacidad total de un enlace es:
-  $16 \text{ GB/s} \times 2 = 32 \text{ GB/s}$
+  $16 \text{ GB/s} \times 2 = 32 \text{ GB/s}$.
 ** Resumen (Summary):
-La evolución tecnológica abandonó los buses compartidos porque las altas frecuencias eléctricas hacían casi imposible sincronizar y arbitrar los datos a tiempo. Al evolucionar a arquitecturas de interconexión punto a punto de alto rendimiento como QPI, se mejora drásticamente la escalabilidad y la latencia del sistema. Esto se logra empleando conexiones directas que eliminan el arbitraje, y gestionando la información estructurada en paquetes a través de protocolos de capas (Física, Enlace, Enrutamiento y Protocolo)
-#+end_comment
-* 2024-xx-xx Título de la clase/charla
-** Preguntas y Términos clave (Cue):
-- ¿qué es el sistema de notas de U. Cornell? ::
-- TODO :: ????
-** Notas (Notes):
-- Sistema eficiente de toma de apuntes
-- Divide la hoja en tres secciones:
-  1. *Sección para preguntas*: apuntar todo lo que no se entiende o la
-     pregunta que surge de la charla
-  2. *Sección para notas: se coloca las notas normales. Aquí podemos
-     explotar Emacs y Programación literaria para incluir código de programación
-  3. *Resumen*: Una vez terminada la clase, en una fase posterior y
-     usando las notas tomadas, y resolviendo las inquietudes, se
-     escribe un resumen de la clase.
-- Emacs se puede usar para facilitar esta tarea dividiendo la pantalla mediante:
-  - Horizontal: ~C-x 2~
-  - Vertical: ~C-x 3~
-  - Cambiar de ventana ~C-x o~
-  - Cerrar una ventana que ya no quiero ~C-x 0~
-  - Cerrar todas las demás ventanas excepto en la que el cursor está ~C-x 1~
-- Una desventaja de Emacs es que no podemos graficar en la pantalla
-- Una ventaja es que podemos escribir la notación matemática usando \LaTeX
-- Una ventaja es que podemos escribir el código de programación de
-  cualquier lenguaje de programación y testearlo directamente desde el archivo.
-  1. numerado
-  2. numerado
-- Emacs nos permite adicionar el ~TODO~ para marcar las tareas y
-  controlar cuáles ya están realizadas. Para esto generamos más
-  viñetas con el [ ]. Si la tarea ya está realizada podemos dar ~C-c
-  C-c~ en la línea y cambiar el estado de la tarea a realizada. Pruebe
-  en el ejemplo.
-** Enlaces de Interés
-- [[https://lsc.cornell.edu/how-to-study/taking-notes/cornell-note-taking-system/][Página web de Cornell University sobre Toma de Notas]]
-- [[https://youtu.be/nX-xshA_0m8?si=20MELdipZ1cjRh2f][YouTube]]
-** Resumen (Summary):
-Emacs ofrece una herramienta que nos permite combinar código y
-literatura así como aprovechar \LaTeX para escribir notación
-matemática. Mediante el uso de combinaciones de teclas se puede
-alternar entre distintas pantallas. Así por ejemplo, se puede dividir
-la pantalla en una región para apuntar las preguntas, otra para las
-notas y una tercera para el resumen. Algo que no incluye la estrategia
-de Cornell es apuntar las tareas. Pero esto lo podemos aprovechar con
-Emacs ~TODO~.
+La evolución tecnológica abandonó los buses compartidos porque las
+altas frecuencias eléctricas hacían casi imposible sincronizar y
+arbitrar los datos a tiempo. Al evolucionar a arquitecturas de
+interconexión punto a punto de alto rendimiento como QPI, se mejora
+drásticamente la escalabilidad y la latencia del sistema. Esto se
+logra empleando conexiones directas que eliminan el arbitraje, y
+gestionando la información estructurada en paquetes a través de
+protocolos de capas (Física, Enlace, Enrutamiento y Protocolo)
 
 
 * TODO Mis Tareas [50%]
