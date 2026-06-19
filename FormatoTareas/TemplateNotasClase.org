@@ -48,20 +48,34 @@ ARQUITECTURA DE COMPUTADORES}
 #+begin_comment
 Este comentario contiene la estructura básica para toma de notas de
 acuerdo a la metodología explicada por la Universidad de Cornell.
-* 2024-xx-xx Título de la clase/charla
+* 2024-xx-xx Interconexión punto a punto
 ** Preguntas y Términos clave (Cue):
-- término clave1 ::
-- término clave2 ::
+- ¿Por qué los buses compartidos tradicionales están siendo reemplazados en los sistemas modernos? ::
+- QPI ::
+- ¿Cuáles son las características principales de las arquitecturas punto a punto? :: 
 ** Notas (Notes):
-- nota1
-- nota2
-  - subnota
-  - subnota
-- nota3
-  1. numerado
-  2. numerado
+*** El fin del bus compartido
+- El bus compartido fue el estándar durante décadas, pero está siendo abandonado debido a restricciones eléctricas.
+- A medida que se incrementa la frecuencia de los buses síncronos anchos para ganar velocidad, resulta cada vez más difícil realizar las funciones de sincronización y arbitraje a tiempo. 
+- La llegada de los chips multinúcleo magnificó las dificultades de los buses compartidos para reducir la latencia y aumentar la tasa de datos.
+
+*** Características de la Interconexión Punto a Punto
+- Este modelo tiene menor latencia, mayor tasa de datos y mejor escalabilidad que los buses compartidos.
+- Presenta 3 características fundamentales:
+  1. *Múltiples conexiones directas:* Existen conexiones directas por parejas entre componentes, lo que elimina por completo la necesidad de arbitraje.
+  2. *Arquitectura de protocolos en capas:* Se estructuran de forma similar a los entornos de redes (como TCP/IP), en lugar de utilizar simples señales de control.
+  3. *Transferencia por paquetes:* Los datos se envían como una secuencia de paquetes que incluyen cabeceras de control y códigos de corrección de errores, en lugar de un flujo de bits crudos.
+*** El modelo QPI (QuickPath Interconnect)
+- Es una arquitectura estructurada en 4 capas: Física, Enlace, Enrutamiento y Protocolo.
+- *Unidades de transferencia:* En la capa Física la unidad es el *Phit* (20 bits). En la capa de Enlace la unidad es el *Flit* (80 bits).
+- La transmisión en cada carril utiliza señalización diferencial de bajo voltaje (LVDS).
+- *Cálculos de capacidad de transferencia:* 
+  A velocidades de señalización típicas de 6.4 GT/s (transferencias por segundo), enviando 20 bits por Phit en cada transferencia, la capacidad por dirección es:
+  $6.4 \text{ GT/s} \times 20 \text{ bits} = 16 \text{ GB/s}$ 
+  Como los enlaces QPI son pares bidireccionales dedicados, la capacidad total de un enlace es:
+  $16 \text{ GB/s} \times 2 = 32 \text{ GB/s}$
 ** Resumen (Summary):
-Aquí se realiza un breve resumen
+La evolución tecnológica abandonó los buses compartidos porque las altas frecuencias eléctricas hacían casi imposible sincronizar y arbitrar los datos a tiempo. Al evolucionar a arquitecturas de interconexión punto a punto de alto rendimiento como QPI, se mejora drásticamente la escalabilidad y la latencia del sistema. Esto se logra empleando conexiones directas que eliminan el arbitraje, y gestionando la información estructurada en paquetes a través de protocolos de capas (Física, Enlace, Enrutamiento y Protocolo)
 #+end_comment
 * 2024-xx-xx Título de la clase/charla
 ** Preguntas y Términos clave (Cue):

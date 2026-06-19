@@ -1,0 +1,227 @@
+% Created 2026-06-18 Thu 23:30
+% Intended LaTeX compiler: pdflatex
+\documentclass[presentation]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[backend=biber, style=apa]{biblatex}
+\addbibresource{/home/emilioalbanfs/BusesDelSistema_G1-G2/bibliography/bibliography.bib}
+\usetheme{Madrid}
+\usecolortheme{}
+\usefonttheme{}
+\useinnertheme{}
+\useoutertheme{}
+\author{G1 - G2}
+\date{2026-06-18}
+\title{S8 — Buses del Sistema}
+
+\hypersetup{
+ pdfauthor={G1 - G2},
+ pdftitle={S8 — Buses del Sistema},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 27.1 (Org mode 9.3)}, 
+ pdflang={Spanish}}
+\begin{document}
+
+\maketitle
+\begin{frame}{Outline}
+\tableofcontents
+\end{frame}
+
+
+\section{Indicaciones}
+\label{sec:org30f29a1}
+\begin{frame}[fragile,allowframebreaks]{Indicaciones}
+ \begin{itemize}
+\item Recuerde que si \texttt{options: H:2}, entonces:
+\begin{itemize}
+\item \texttt{*} Declara el nombre de la Sección
+\item \texttt{**} Declara el nombre de la diapositiva
+\end{itemize}
+\item Puede alterar la estructura de la diapositiva si lo considera necesario
+\item Reparto del tema por grupos:
+\begin{itemize}
+\item \alert{G1:} Estructuras de Interconexión, Interconexión punto a punto, QPI
+\item \alert{G2:} Interconexión con Buses, Jerarquía de Buses, Elementos de Diseño, PCI Express
+\end{itemize}
+\item Para este tema consulte las siguientes fuentes:
+\begin{itemize}
+\item \textcite{stallings2006esp}, 7ma edición, 2006, Español, páginas 99 a 119.
+\item \textcite{stallings2022computer}, 11ava edición, 2022, English, páginas 116 a 131.
+\end{itemize}
+\item Las tuplas (7, 99) significan: Edición 7, página 99 del PDF.
+\item El grupo expone el tema y sube la presentación (\texttt{.ORG} y \texttt{.PDF} para Beamer, o \texttt{.ORG} y \texttt{.HTML} para reveal.js)
+\item El grupo sube las ayudas memoria/notas del tema usando la plantilla \url{FormatoTareas/TemplateNotasClase.org} (\texttt{.ORG} y \texttt{.PDF})
+\end{itemize}
+\end{frame}
+\begin{frame}[label={sec:org43704fc},fragile]{Diseño de las Diapositivas}
+ \begin{itemize}
+\item Para diseñar sus diapositivas puede consultar cualquiera de las
+presentaciones \texttt{.ORG} desarrolladas por el profesor así como al
+archivo \href{https://github.com/LeninGF/EPN-Lectures/blob/main/iccd332ArqComp-2024-B/Tutoriales/Beamer-Emacs/tutorialBeamer.org}{tutorialBeamer.org} en el repositorio de la clase.
+\item Recuerde que los archivos \texttt{.ORG} son archivos de texto así que los
+puede copiar y sustituir por su texto propio.
+\end{itemize}
+\end{frame}
+\begin{frame}[label={sec:org9811fde}]{Sobre este Documento}
+\begin{itemize}
+\item Este documento tiene la propuesta de temas a tratar y desarrollar
+por los estudiantes.
+\item Se ha de utilizar como base la bibliografía recomendada, pero puede
+consultar bibliografía adicional.
+\end{itemize}
+\end{frame}
+\section{Buses del Sistema}
+\label{sec:orgc04bbbb}
+\begin{frame}[label={sec:orga650b4b}]{Estructuras de Interconexión (7, 97)}
+\end{frame}
+\section{Interconexión con Buses}
+\label{sec:org64efd30}
+\begin{frame}[label={sec:orgee61c42}]{Interconexión con Buses (7, 99)}
+\end{frame}
+\begin{frame}[label={sec:org269e789}]{Estructura del Bus  (7, 99)}
+\end{frame}
+\begin{frame}[label={sec:orgd6cc553}]{Jerarquía de Buses Múltiples (7, 102)}
+\end{frame}
+\begin{frame}[label={sec:org7dcde73}]{Elementos de Diseño de un Bus (7, 104)}
+\end{frame}
+\section{Interconexión punto a punto}
+\label{sec:org50dcd34}
+\begin{frame}[label={sec:org9fd9279}]{Problemas del bus compartido tradicional}
+\begin{center}
+\includegraphics[width=.9\linewidth]{./images/BusCuelloDeBotella.jpeg}
+\end{center}
+-Restricciones eléctricas: Al subir la frecuencia del reloj para ganar velocidad, el bus tradicional falla\\[0pt]
+-El problema: Con tasas de datos tan altas, es casi imposible realizar la sincronización y el arbitraje a tiempo y sin errores\\[0pt]
+\end{frame}
+\begin{frame}[label={sec:org0880dad}]{El Reemplazo: Interconexión Punto a Punto}
+\begin{center}
+\includegraphics[width=.9\linewidth]{./images/InterconexionPuntoaPunto.jpeg}
+\end{center}
+-El nuevo estándar: El bus compartido ha sido reemplazado casi por completo por interconexiones punto a punto\\[0pt]
+-Ventajas: Menos latencia, una tasa de datos significativamente más alta y mejor escalabilidad\\[0pt]
+\end{frame}
+\begin{frame}[label={sec:org0e064cb}]{El Reemplazo: Las 3 características modernas}
+\begin{center}
+\includegraphics[width=.9\linewidth]{./images/CapasIPP.jpeg}
+\end{center}
+\begin{enumerate}
+\item Conexiones directas por parejas: Al enlazar directamente dos componentes, se elimina por completo la necesidad de arbitraje
+\item Arquitectura de protocolos en capas: Se estructuran de forma similar a las redes de datos (como TCP/IP)
+\item Transferencia por paquetes: Los datos se envían como secuencias de paquetes que incluyen cabeceras y detección de errores
+\end{enumerate}
+\end{frame}
+\begin{frame}[label={sec:orgca19f15}]{QPI (11, 120): Ejemplo de Interconexión Punto a Punto: Intel QPI?}
+\begin{itemize}
+\item \alert{\alert{Interconexión punto a punto}} de alta velocidad introducida en 2008 \autocite[p.118]{stallings2022computer}.
+\item \alert{\alert{Motivación:}} Superar restricciones eléctricas y latencia de los
+buses compartidos en chips multinúcleo.
+\item \alert{\alert{Pilares:}}
+\begin{itemize}
+\item Conexiones directas por pares (sin arbitraje).
+\item Arquitectura de protocolo en capas.
+\item Transferencia de datos mediante paquetes con control de errores.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:orgc56b037}]{Configuración Multinúcleo y Red de Conmutación}
+\begin{columns}
+\begin{column}{0.5\columnwidth}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{./images/MulticoreConfigurationQPI.png}
+\end{center}
+\end{column}
+
+\begin{column}{0.5\columnwidth}
+\begin{itemize}
+\item Los enlaces QPI (flechas verdes) forman una \alert{malla de conmutación} (switching fabric).
+\item Permite que los datos "salten" entre núcleos para llegar a su destino.
+\item Conecta el procesador con el I/O Hub (IOH), que traduce señales hacia dispositivos PCIe.** Configuración Multinúcleo y Red de Conmutación
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label={sec:orgeef8a8b}]{Arquitectura de 4 Capas de QPI}
+\begin{center}
+\includegraphics[width=0.5\textwidth]{./images/QPILayers.png}
+\end{center}
+
+\begin{itemize}
+\item \alert{\alert{Protocolo:}} Reglas de alto nivel y coherencia de caché.
+\item \alert{\alert{Encaminamiento (Routing):}} Tablas de ruta definidas por firmware.
+\item \alert{\alert{Enlace (Link):}} Transmisión confiable y control de flujo por Flits.
+\item \alert{\alert{Física:}} Unidades eléctricas y lógica de bits (Phits).
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:orgd707dab}]{Capa Física: Phits y Señalización Diferencial}
+\begin{center}
+\includegraphics[width=0.45\textwidth]{./images/PhysicalInterfaceQPIInterconnect.png}
+\end{center}
+
+\begin{itemize}
+\item \alert{\alert{Phit (Physical Unit):}} Unidad mínima de 20 bits.
+\item \alert{\alert{Señalización Diferencial (LVDS):}} Compara voltajes entre dos cables para reducir ruido.
+\item \alert{\alert{Capacidad:}} Hasta 6.4 GT/s (transferencias por segundo), moviendo
+hasta 32 GB/s.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:org105d32f}]{Capa Física: Distribución Multicarril}
+\begin{columns}
+\begin{column}{0.5\columnwidth}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{./images/DistribucionMulticarrilQPI.png}
+\end{center}
+\end{column}
+
+\begin{column}{0.5\columnwidth}
+\begin{itemize}
+\item El puerto QPI usa 20 carriles (\alert{lanes}) de datos en cada dirección.
+\item Los bits de un Flit se reparten entre los carriles usando técnica \alert{round‑robin}.
+\item Permite la transmisión de un Phit completo (20 bits) en paralelo por ciclo.
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label={sec:org50405eb}]{Capa de Enlace: Flits y Control de Flujo}
+\begin{itemize}
+\item \alert{\alert{Flit (Flow Control Unit):}} PDU de 80 bits (72 de mensaje + 8 de CRC).
+\item \alert{\alert{Control de errores:}} Si el CRC falla, el receptor solicita retransmisión inmediata.
+\item \alert{\alert{Esquema de Créditos:}} El receptor devuelve créditos al emisor cuando su buffer tiene espacio, evitando saturación.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:orgeac0a7c}]{Capas de Encaminamiento y Protocolo}
+\begin{itemize}
+\item \alert{\alert{Encaminamiento:}} Decide el camino del paquete a través de los nodos del sistema usando tablas de rutas.
+\item \alert{\alert{Protocolo:}} Maneja la coherencia de caché, asegurando que todos los núcleos vean el dato más actualizado de la memoria.
+\item \alert{\alert{Unidad de mensaje:}} El "Paquete", que consiste en un número entero de Flits.
+\end{itemize}
+\end{frame}
+
+\section{PCI Express}
+\label{sec:org6b6717f}
+\begin{frame}[label={sec:org1015eb1}]{PCI Express (11, 123)}
+\end{frame}
+\section{Referencias}
+\label{sec:org4bc88ce}
+\begin{frame}[allowframebreaks]{Bibliografía}
+\printbibliography
+\end{frame}
+\end{document}

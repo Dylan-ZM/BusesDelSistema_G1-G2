@@ -1,7 +1,7 @@
 #+options: H:2
 #+latex_class: beamer
 #+columns: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
-#+beamer_theme: default
+#+beamer_theme: Madrid
 #+beamer_color_theme:
 #+beamer_font_theme:
 #+beamer_inner_theme:
@@ -9,8 +9,8 @@
 #+beamer_header:
 
 #+title: S8 — Buses del Sistema
-#+date: 
-#+author: Lenin G. Falconí
+#+date: 2026-06-18
+#+author: G1 - G2
 #+email: lenin.falconi@epn.edu.ec
 #+language: es
 #+select_tags: export
@@ -61,8 +61,93 @@
 ** Jerarquía de Buses Múltiples (7, 102)
 ** Elementos de Diseño de un Bus (7, 104)
 * Interconexión punto a punto
-** Interconexión punto a punto (11, 118)
-** QPI (11, 120)
+** Problemas del bus compartido tradicional
+[[./images/BusCuelloDeBotella.jpeg]]
+-Restricciones eléctricas: Al subir la frecuencia del reloj para ganar velocidad, el bus tradicional falla\\
+-El problema: Con tasas de datos tan altas, es casi imposible realizar la sincronización y el arbitraje a tiempo y sin errores\\
+** El Reemplazo: Interconexión Punto a Punto
+[[./images/InterconexionPuntoaPunto.jpeg]]
+-El nuevo estándar: El bus compartido ha sido reemplazado casi por completo por interconexiones punto a punto\\
+-Ventajas: Menos latencia, una tasa de datos significativamente más alta y mejor escalabilidad\\
+** El Reemplazo: Las 3 características modernas 
+[[./images/CapasIPP.jpeg]]
+1. Conexiones directas por parejas: Al enlazar directamente dos componentes, se elimina por completo la necesidad de arbitraje
+2. Arquitectura de protocolos en capas: Se estructuran de forma similar a las redes de datos (como TCP/IP)
+3. Transferencia por paquetes: Los datos se envían como secuencias de paquetes que incluyen cabeceras y detección de errores   
+** QPI (11, 120): Ejemplo de Interconexión Punto a Punto: Intel QPI?
+# INSTRUCCIÓN: Introducción y motivación del cambio de bus a punto a punto.
+- **Interconexión punto a punto** de alta velocidad introducida en 2008 [cite:@stallings2022computer p.118].
+- **Motivación:** Superar restricciones eléctricas y latencia de los
+  buses compartidos en chips multinúcleo.
+- **Pilares:**
+  - Conexiones directas por pares (sin arbitraje).
+  - Arquitectura de protocolo en capas.
+  - Transferencia de datos mediante paquetes con control de errores.
+
+** Configuración Multinúcleo y Red de Conmutación
+
+*** Imagen QPI                                               :Imagen:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+#+ATTR_LATEX: :width 0.9\textwidth
+[[./images/MulticoreConfigurationQPI.png]]
+
+*** Explicación                                              :Texto:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+- Los enlaces QPI (flechas verdes) forman una *malla de conmutación* (switching fabric).
+- Permite que los datos "salten" entre núcleos para llegar a su destino.
+- Conecta el procesador con el I/O Hub (IOH), que traduce señales hacia dispositivos PCIe.** Configuración Multinúcleo y Red de Conmutación
+#+ATTR_LATEX: :width 0.45\textwidth
+
+** Arquitectura de 4 Capas de QPI
+#+ATTR_LATEX: :width 0.5\textwidth
+[[file:./images/QPILayers.png]]
+
+- **Protocolo:** Reglas de alto nivel y coherencia de caché.
+- **Encaminamiento (Routing):** Tablas de ruta definidas por firmware.
+- **Enlace (Link):** Transmisión confiable y control de flujo por Flits.
+- **Física:** Unidades eléctricas y lógica de bits (Phits).
+
+** Capa Física: Phits y Señalización Diferencial
+
+#+ATTR_LATEX: :width 0.45\textwidth
+[[file:./images/PhysicalInterfaceQPIInterconnect.png]]
+
+- **Phit (Physical Unit):** Unidad mínima de 20 bits.
+- **Señalización Diferencial (LVDS):** Compara voltajes entre dos cables para reducir ruido.
+- **Capacidad:** Hasta 6.4 GT/s (transferencias por segundo), moviendo
+  hasta 32 GB/s.
+  
+** Capa Física: Distribución Multicarril
+
+*** Imagen                                                     :Imagen:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+#+ATTR_LATEX: :width 0.9\textwidth
+[[./images/DistribucionMulticarrilQPI.png]]
+
+*** Explicación                                                :Texto:
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+- El puerto QPI usa 20 carriles (*lanes*) de datos en cada dirección.
+- Los bits de un Flit se reparten entre los carriles usando técnica *round‑robin*.
+- Permite la transmisión de un Phit completo (20 bits) en paralelo por ciclo.
+  
+** Capa de Enlace: Flits y Control de Flujo
+- **Flit (Flow Control Unit):** PDU de 80 bits (72 de mensaje + 8 de CRC).
+- **Control de errores:** Si el CRC falla, el receptor solicita retransmisión inmediata.
+- **Esquema de Créditos:** El receptor devuelve créditos al emisor cuando su buffer tiene espacio, evitando saturación.
+
+** Capas de Encaminamiento y Protocolo
+- **Encaminamiento:** Decide el camino del paquete a través de los nodos del sistema usando tablas de rutas.
+- **Protocolo:** Maneja la coherencia de caché, asegurando que todos los núcleos vean el dato más actualizado de la memoria.
+- **Unidad de mensaje:** El "Paquete", que consiste en un número entero de Flits.
+
 * PCI Express
 ** PCI Express (11, 123)
 * Referencias
